@@ -1,4 +1,5 @@
 const APP_VERSION = "v0.1.0 Alpha";
+document.getElementById("versionTag").textContent = APP_VERSION;
 const channels = [
   { group: 'Emergency Operations', name: 'state-eoc-command', desc: 'Statewide EOC command and coordination', roles: ['State EOC Director','Emergency Operations','State Agency'] },
   { group: 'Emergency Operations', name: 'eoc-operations', desc: 'Operational coordination between EOCs and field units', roles: ['State EOC Director','Emergency Operations','Local EOC','State Agency','Local Agency'] },
