@@ -17,6 +17,7 @@ let user = null;
 let activeChannel = channels[0];
 let incidentCounter = 1;
 let messages = JSON.parse(localStorage.getItem('responsenetMessages') || '{}');
+let onlineUsers = JSON.parse(localStorage.getItem('responsenetOnlineUsers') || '[]');
 
 const loginPanel = document.getElementById('loginPanel');
 const channelList = document.getElementById('channelList');
@@ -32,7 +33,9 @@ function nowStamp() {
 }
 
 function canAccess(channel) {
-  return user && channel.roles.includes(user.role);
+  if (!user) return false;
+  if (user.role === 'System Administrator') return true;
+  return channel.roles.includes(user.role);
 }
 
 function seedMessages() {
@@ -104,6 +107,15 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
 
+
+function updateOnlineList() {
+  const el = document.getElementById('onlineMembers');
+  if (!el) return;
+  el.innerHTML = onlineUsers.map(u =>
+    `<div><strong>${escapeHtml(u.name)}</strong> - ${escapeHtml(u.role)}</div>`
+  ).join('');
+}
+
 function login() {
   const name = document.getElementById('nameInput').value.trim() || 'Responder';
   const role = document.getElementById('roleInput').value;
@@ -119,6 +131,9 @@ function login() {
   mainApp.classList.remove('hidden');
   currentUser.textContent = name;
   currentRole.textContent = role;
+  onlineUsers.push({name, role});
+  localStorage.setItem('responsenetOnlineUsers', JSON.stringify(onlineUsers));
+  updateOnlineList();
   renderChannels();
   renderMessages();
 }
