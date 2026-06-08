@@ -67,3 +67,20 @@ ul { color: var(--muted); padding-left: 20px; }
   .topbar { flex-direction: column; align-items: stretch; }
   .composer { grid-template-columns: 1fr; }
 }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.version-tag {
+  background: #0f172a;
+  color: #38bdf8;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
