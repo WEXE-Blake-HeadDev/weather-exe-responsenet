@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResponseNet Secure EOC Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">RN</div>
+        <div>
+          <h1>ResponseNet</h1>
+          <p>Secure EOC Chat Prototype</p>
+        </div>
+      </div>
+
+      <section class="login-panel" id="loginPanel">
+        <h2>Secure Access</h2>
+        <label>Responder Name</label>
+        <input id="nameInput" placeholder="Example: Blake / EOC Ops" />
+        <label>Agency Role</label>
+        <select id="roleInput">
+          <option value="State EOC Director">State EOC Director</option>
+          <option value="Emergency Operations">Emergency Operations</option>
+          <option value="Local EOC">Local EOC</option>
+          <option value="LEO">LEO</option>
+          <option value="Medic">Medic</option>
+          <option value="Fire">Fire</option>
+          <option value="State Patrol">State Patrol</option>
+          <option value="State Agency">State Agency</option>
+          <option value="Local Agency">Local Agency</option>
+          <option value="Weather Operations">Weather Operations</option>
+        </select>
+        <label>Access Code</label>
+        <input id="codeInput" type="password" placeholder="Demo code: EOC2026" />
+        <button id="loginBtn">Enter Secure Room</button>
+        <p class="hint">Demo only. Use <strong>EOC2026</strong>.</p>
+      </section>
+
+      <nav class="channel-list hidden" id="channelList"></nav>
+    </aside>
+
+    <main class="main hidden" id="mainApp">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Active Channel</p>
+          <h2 id="channelTitle">#state-eoc-command</h2>
+          <span id="channelDesc">Statewide command and coordination</span>
+        </div>
+        <div class="status-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong id="currentUser">Not signed in</strong>
+            <p id="currentRole">Role pending</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="command-strip">
+        <button data-priority="Routine">Routine</button>
+        <button data-priority="Priority">Priority</button>
+        <button data-priority="Urgent">Urgent</button>
+        <button data-priority="Immediate">Immediate</button>
+        <button id="createIncidentBtn">Create Incident Room</button>
+      </section>
+
+      <section class="chat-layout">
+        <div class="chat-card">
+          <div class="messages" id="messages"></div>
+          <form class="composer" id="messageForm">
+            <select id="priorityInput" aria-label="Message priority">
+              <option>Routine</option>
+              <option>Priority</option>
+              <option>Urgent</option>
+              <option>Immediate</option>
+            </select>
+            <input id="messageInput" placeholder="Type verified operational update, request, or SITREP..." autocomplete="off" />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+
+        <aside class="ops-panel">
+          <section>
+            <h3>Incident Status</h3>
+            <div class="metric"><span>Open Incidents</span><strong id="incidentCount">1</strong></div>
+            <div class="metric"><span>Active Agencies</span><strong>9</strong></div>
+            <div class="metric"><span>Mode</span><strong>Enhanced Watch</strong></div>
+          </section>
+          <section>
+            <h3>Quick Templates</h3>
+            <button class="template">SITREP: Location / Impact / Needs</button>
+            <button class="template">Resource Request: Type / Qty / ETA</button>
+            <button class="template">Weather Briefing: Hazard / Timing / Confidence</button>
+            <button class="template">Road Closure: Route / Reason / Duration</button>
+          </section>
+          <section>
+            <h3>Security Controls</h3>
+            <ul>
+              <li>Role-based channel access</li>
+              <li>Audit trail simulation</li>
+              <li>Priority message tagging</li>
+              <li>Local encrypted storage placeholder</li>
+            </ul>
+          </section>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
